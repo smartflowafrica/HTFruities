@@ -98,7 +98,7 @@ class AddForeignIdColumn extends Migration
         });
 
         // Make Category Parent ID Nullable instead of 0
-        \App\Models\Category::query()->where("parent_id", "=", 0)->update(["parent_id" => null]);
+        \Illuminate\Support\Facades\DB::table('categories')->where("parent_id", "=", 0)->update(["parent_id" => null]);
 
 
         Schema::table('categories', function (Blueprint $table) {
