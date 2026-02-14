@@ -1,4 +1,9 @@
 @extends('frontend.default.layouts.master')
+
+@section('title')
+    {{ localize('Server Error') }} {{ getSetting('title_separator') }} {{ getSetting('system_title') }}
+@endsection
+
 @section('contents')
     <section class="section-404 ptb-120 position-relative overflow-hidden z-1">
         <img src="{{ staticAsset('frontend/default/assets/img/shapes/frame-circle.svg') }}" alt="frame circle"
