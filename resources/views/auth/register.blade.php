@@ -10,9 +10,7 @@
     <section class="login-section py-5">
         <div class="container">
             <div class="row justify-content-center">
-                {{-- todo:: make banner dynamic --}}
-                <div class="col-lg-5 col-12 tt-login-img"
-                    data-background="{{ staticAsset('frontend/default/assets/img/banner/login-banner.jpg') }}"></div>
+
                 <div class="col-lg-5 col-12 bg-white d-flex p-0 tt-login-col shadow">
                     <form class="tt-login-form-wrap p-3 p-md-6 p-lg-6 py-7 w-100 " action="{{ route('register') }}"
                         method="POST" id="login-form">
@@ -55,14 +53,13 @@
                                 <div class="input-field">
                                     <label class="fw-bold text-dark fs-sm mb-1">
                                         @if (getSetting('registration_with') == 'email_and_phone')
-                                            {{ localize('Phone') }}<sup class="text-danger">*</sup>
+                                            {{ localize('Phone number') }}<sup class="text-danger">*</sup>
                                         @else
-                                            {{ localize('Phone') }}
+                                            {{ localize('Phone number') }}
                                         @endif
-                                        <small>({{ localize('Enter phone number with country code') }})</small>
                                     </label>
                                     <input type="text" id="phone" name="phone" placeholder="+xxxxxxxxxx"
-                                        class="theme-input" value="{{ old('phone') }}"
+                                        class="theme-input" value="{{ old('phone', '+234') }}"
                                         @if (getSetting('registration_with') == 'email_and_phone') required @endif>
                                 </div>
                             </div>

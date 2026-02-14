@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--favicon icon-->
-    <link rel="shortcut icon" href="{{ staticAsset('backend/assets/img/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ getSetting('favicon') ? uploadedAsset(getSetting('favicon')) : staticAsset('backend/assets/img/favicon.png') }}">
 
     <!--title-->
     <title>

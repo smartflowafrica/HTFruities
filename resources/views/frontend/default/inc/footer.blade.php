@@ -104,15 +104,7 @@
                                 class="img-fluid"></a>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="footer-payments-info d-flex align-items-center justify-content-lg-end gap-2">
-                        <div
-                            class="rounded-1 d-inline-flex align-items-center justify-content-center p-2 flex-shrink-0">
-                            <img src="{{ uploadedAsset(getSetting('accepted_payment_banner')) }}"
-                                alt="accepted_payment" class="img-fluid">
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
