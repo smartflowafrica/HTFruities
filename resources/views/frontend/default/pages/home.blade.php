@@ -4,6 +4,14 @@
     {{ localize('Home') }} {{ getSetting('title_separator') }} {{ getSetting('system_title') }}
 @endsection
 
+@section('meta')
+    <meta property="og:title" content="{{ getSetting('system_title') }} - Fresh & Organic" />
+    <meta property="og:description" content="Order fresh customized parfaits, organic fruits, and healthy juices delivered to your doorstep." />
+    <meta property="og:image" content="{{ uploadedAsset(getSetting('global_meta_image')) }}" />
+    <meta property="og:url" content="{{ route('home') }}" />
+    <meta property="og:type" content="website" />
+@endsection
+
 @section('contents')
     {{--
         ORIGINAL DEFAULT ORDER (for reverting):
