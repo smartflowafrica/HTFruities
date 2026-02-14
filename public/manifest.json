@@ -1,11 +1,12 @@
 {
-    "name": "Grostore",
-    "short_name": "Grostore",
+    "name": "Honey Tee Fruities",
+    "short_name": "HoneyTee",
     "start_url": "/",
-    "background_color": "#6777ef",
-    "description": "Grostore",
-    "display": "fullscreen",
+    "background_color": "#ffffff",
+    "description": "Honey Tee Fruities - Fresh parfaits and more",
+    "display": "standalone",
     "theme_color": "#6eb356",
+    "orientation": "portrait",
     "icons": [
         {
             "src": "pwa.png",
