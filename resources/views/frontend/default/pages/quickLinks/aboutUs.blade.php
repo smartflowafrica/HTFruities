@@ -85,7 +85,7 @@
     </section>
     <!--about section end-->
 
-    <!--brands section start-->
+    {{-- <!--brands section start-->
     <section class="brands-section ptb-120 position-relative z-1 overflow-hidden service-section">
         <img src="{{ staticAsset('frontend/default/assets/img/shapes/bg-shape-4.png') }}" alt="bg shape"
             class="position-absolute start-0 bottom-0 w-100 z--1 bg-shape">
@@ -109,9 +109,9 @@
             </div>
         </div>
     </section>
-    <!--brands section end-->
+    <!--brands section end--> --}}
 
-    <!--feature section start-->
+    {{-- <!--feature section start-->
     <section class="about-section bg-shade position-relative z-1">
         <img src="{{ staticAsset('frontend/default/assets/img/shapes/bg-shape-5.png') }}" alt="bg shape"
             class="position-absolute start-0 bottom-0 z--1 w-100">
@@ -149,9 +149,9 @@
             </div>
         </div>
     </section>
-    <!--feature section end-->
+    <!--feature section end--> --}}
 
-    <!--about us section-->
+    {{-- <!--about us section-->
     <section class="about-us-section ptb-120">
         <div class="container">
             <div class="row g-4 align-items-center">
@@ -201,5 +201,5 @@
             </div>
         </div>
     </section>
-    <!--about us section end-->
+    <!--about us section end--> --}}
 @endsection
