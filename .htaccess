@@ -3,15 +3,26 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    # ENABLE SYMLINKS (Crucial for the shortcuts to work)
+    Options +FollowSymLinks
+
     RewriteEngine On
 
-    # DIRECT EVERYTHING TO PUBLIC FOLDER
-    # This must be the VERY FIRST rule.
-    RewriteCond %{REQUEST_URI} !^/public/
-    RewriteRule ^(.*)$ public/$1 [L,QSA]
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
 </IfModule>
 
-# Keep these safety rules
 <Files .env>
     Require all denied
 </Files>
