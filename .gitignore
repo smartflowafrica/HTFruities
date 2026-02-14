@@ -32,3 +32,15 @@ multivendor-rename-to-vendor.zip
 # uploads.zip
 copy.php
 change-list.txt
+
+# VPS Symlinks (Safety Belt)
+/frontend
+/backend
+/uploads
+/fonts
+/robots.txt
+/manifest.json
+/sw.js
+/pwa.png
+/offline.html
+/favicon.ico
