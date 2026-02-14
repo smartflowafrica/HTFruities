@@ -1,6 +1,6 @@
 @extends('frontend.default.layouts.master')
 @section('title')
-    Under Maintenance
+    {{ localize('Under Maintenance') }} {{ getSetting('title_separator') }} {{ getSetting('system_title') }}
 @endsection
 @section('contents')
     <section class="section-404 ptb-120 position-relative overflow-hidden z-1">
