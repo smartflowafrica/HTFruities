@@ -10,11 +10,11 @@
         <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6">
                 <div class="gshop_subscribe_form text-center">
-                    <h4 class="text-white gshop-title">{{ localize('Subscribe to the us') }}<mark
+                    <h4 class="text-white gshop-title">{{ localize('Subscribe to get updates on') }}<mark
                             class="p-0 position-relative text-secondary bg-transparent"> {{ localize('New Arrivals') }}
                             <img src="{{ staticAsset('frontend/default/assets/img/shapes/border-line.svg') }}"
                                 alt="border line" class="position-absolute border-line"></mark><br
-                            class="d-none d-sm-block">{{ localize('& Other Information.') }}</h4>
+                            class="d-none d-sm-block">{{ localize('& Special Offers.') }}</h4>
                     <form class="mt-5 d-flex align-items-center bg-white rounded subscribe_form"
                         action="{{ route('subscribe.store') }}" method="POST">
                         @csrf
