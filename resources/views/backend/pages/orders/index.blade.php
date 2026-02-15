@@ -356,7 +356,10 @@
             const $deleteSpinner  = $('#deleteSpinner');
             const bulkDeleteModal = new bootstrap.Modal($('#bulkDeleteModal')[0]);
 
+            // Existing code...
+
             function updateBulkBar() {
+                // ... existing function content ...
                 const total   = $('.order-checkbox').length;
                 const checked = $('.order-checkbox:checked').length;
                 $selectedCount.text(checked);
@@ -371,6 +374,71 @@
                 $('#selectAllOrders').prop('checked', checked === total && total > 0);
                 $('#selectAllOrders').prop('indeterminate', checked > 0 && checked < total);
             }
+
+            // ... existing delegated events ...
+
+            // Polling for new orders
+            let lastLatestId = 0;
+            let initialized = false;
+
+            // Initialize initial state check immediately
+            checkNewOrders(true);
+
+            setInterval(function() {
+                checkNewOrders(false);
+            }, 10000); // Poll every 10 seconds
+
+            function checkNewOrders(isInit) {
+                $.ajax({
+                    url: '{{ route("admin.orders.checkNew") }}',
+                    type: 'GET',
+                    success: function(res) {
+                        if (isInit) {
+                            lastLatestId = res.latest_id;
+                            initialized = true;
+                        } else {
+                            if (initialized && res.latest_id > lastLatestId) {
+                                // New order detected!
+                                playIncomingOrderSound();
+                                
+                                // Optional visual alert before reload
+                                // toastr.success("New Order Received!");
+                                
+                                // Reload page to show new order
+                                setTimeout(function(){
+                                    window.location.reload();
+                                }, 3000); // Wait 3 seconds for sound to start playing/finish
+                            }
+                        }
+                    }
+                });
+            }
+
+            function playIncomingOrderSound() {
+                // Text to Speech
+                if ('speechSynthesis' in window) {
+                    const msg = new SpeechSynthesisUtterance();
+                    msg.text = "Incoming Order! Incoming Order!";
+                    msg.volume = 1; // 0 to 1
+                    msg.rate = 1;   // 0.1 to 10
+                    msg.pitch = 1;  // 0 to 2
+                    
+                    // Try to trigger it
+                    window.speechSynthesis.speak(msg);
+                    
+                    // Repeat it once more for loudness/clarity
+                     msg.onend = function(e) {
+                         window.speechSynthesis.speak(msg);
+                     };
+
+                } else {
+                    // Fallback to a beep if TTS not supported (rare in modern browsers)
+                    console.log("TTS not supported");
+                }
+            }
+
+            // ... rest of existing code ...
+
 
             // select all / deselect all  (delegated)
             $(document).on('change', '#selectAllOrders', function() {

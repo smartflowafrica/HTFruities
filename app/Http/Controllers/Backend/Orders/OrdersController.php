@@ -332,4 +332,15 @@ class OrdersController extends Controller
 
         return $data;
     }
+    # check for new orders
+    public function ajaxCheckNewOrders()
+    {
+        $latestOrder = Order::latest()->first();
+        $latestId = $latestOrder ? $latestOrder->id : 0;
+        
+        return response()->json([
+            'latest_id' => $latestId,
+            'count' => Order::count()
+        ]);
+    }
 }

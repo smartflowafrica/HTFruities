@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\Orders\ParfaitOrdersController;
 # orders
 Route::group(['prefix' => 'orders'], function () {
     Route::get('/', [OrdersController::class, 'index'])->name('admin.orders.index');
+    Route::get('/check-new', [OrdersController::class, 'ajaxCheckNewOrders'])->name('admin.orders.checkNew');
     Route::post('/bulk-delete', [OrdersController::class, 'bulkDelete'])->name('admin.orders.bulkDelete');
     Route::get('/parfait', [ParfaitOrdersController::class, 'index'])->name('admin.orders.parfait');
     Route::get('/{id}', [OrdersController::class, 'show'])->name('admin.orders.show');
