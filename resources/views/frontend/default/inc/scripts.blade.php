@@ -14,7 +14,7 @@
 
 <script src="{{ staticAsset('frontend/common/js/toastr.min.js') }}"></script>
 <script src="{{ staticAsset('frontend/common/js/select2.js') }}"></script>
-<script src="{{ staticAsset('frontend/default/assets/js/app.js') }}"></script>
+<script src="{{ staticAsset('frontend/default/assets/js/app.js') }}?v={{ time() }}"></script>
 
 <script>
     "use strict"
