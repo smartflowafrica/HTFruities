@@ -27,6 +27,9 @@
 
     <!--favicon icon-->
     <link rel="icon" href="{{ getSetting('favicon') ? uploadedAsset(getSetting('favicon')) : staticAsset('backend/assets/img/favicon.png') }}" type="image/png" sizes="16x16">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="{{ url('manifest.json') }}">
 
     <!--title-->
     <title>
@@ -167,14 +170,15 @@
         <!--page's script-->
 
         <!--for pwa-->
-        <script src="{{ url('/') . '/public/sw.js' }}"></script>
+        <!--for pwa-->
         <script>
-            if (!navigator.serviceWorker?.controller) {
-                navigator.serviceWorker?.register("./public/sw.js").then(function(reg) {
-                    // console.log("Service worker has been registered for scope: " + reg.scope);
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js').then(function(reg) {
+                    // console.log("Service worker registered: " + reg.scope);
                 });
             }
         </script>
+        <!--for pwa-->
         <!--for pwa-->
 
         </body>
