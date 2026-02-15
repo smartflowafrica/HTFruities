@@ -161,6 +161,7 @@ Route::group(['prefix' => '', 'middleware' => ['customer', 'verified', 'isBanned
 
     # order tracking
     Route::get('/track-order', [OrderTrackingController::class, 'index'])->name('customers.trackOrder');
+    Route::get('/track-order/status', [OrderTrackingController::class, 'ajaxStatus'])->name('customers.trackOrder.status');
 
     # reward points
     Route::get('/reward-points', [RewardPointsController::class, 'index'])->name('customers.rewardPoints');

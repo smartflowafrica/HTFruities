@@ -90,3 +90,34 @@
         </div>
     </section>
 @endsection
+
+@section('scripts')
+    @isset($order)
+        <script>
+            "use strict";
+            $(document).ready(function() {
+                let currentStatus = "{{ $order->delivery_status }}";
+                let updatesCount = {{ $order->orderUpdates->count() }};
+                let searchCode = "{{ $searchCode }}";
+
+                setInterval(function() {
+                    $.ajax({
+                        url: "{{ route('customers.trackOrder.status') }}",
+                        type: "GET",
+                        data: {
+                            code: searchCode
+                        },
+                        success: function(response) {
+                            if (response.status) {
+                                if (response.delivery_status !== currentStatus || response.updates_count !== updatesCount) {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    });
+                }, 15000); // Poll every 15 seconds
+            });
+        </script>
+    @endisset
+@endsection
+

@@ -34,4 +34,26 @@ class OrderTrackingController extends Controller
 
         return $view;
     }
+    
+    # check status 
+    public function ajaxStatus(Request $request)
+    {
+        if ($request->code != null) {
+            $searchCode = $request->code;
+            $orderGroup = OrderGroup::where('order_code', $searchCode)->first();
+            
+            if (!is_null($orderGroup)) {
+                $order = Order::where('user_id', auth()->user()->id)->where('order_group_id', $orderGroup->id)->first();
+                if ($order) {
+                    return response()->json([
+                        'status' => true,
+                        'delivery_status' => $order->delivery_status,
+                        'updates_count' => $order->orderUpdates->count()
+                    ]);
+                }
+            }
+        }
+        return response()->json(['status' => false]);
+    }
 }
+
