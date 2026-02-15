@@ -360,58 +360,58 @@ jQuery(function ($) {
     );
 
     const meatSlider = document.querySelector(".meat-category-slider");
-  if (meatSlider) {
-    const meatSliderInit = new Swiper(meatSlider, {
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 24,
-      pagination: {
-        el: ".meat-category-slider__pagination",
-        clickable: true
-      },
-      breakpoints: {
-        576: {
-          slidesPerView: 2
-        },
-        992: {
-          slidesPerView: 3
-        }
-      }
-    });
-  }
-  // Meat Feedback Slider
-  const meatFeedbackSlider = document.querySelector(".meat-feedback-slider");
-  if (meatFeedbackSlider) {
-    const meatFeedbackSliderInit = new Swiper(meatFeedbackSlider, {
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 24,
-      autoplay: true,
-      speed: 2000,
-      breakpoints: {
-        992: {
-          slidesPerView: 2
-        }
-      },
-      pagination: {
-        el: ".meat-feedback-slider-container__pagination",
-        clickable: true
-      }
-    });
-  }
-  // On Sale Slider
-  const onSaleSlider = document.querySelector(".on-sale-slider");
-  if (onSaleSlider) {
-    const onSaleSliderInit = new Swiper(onSaleSlider, {
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 16,
-      navigation: {
-        prevEl: ".on-sale-slider__nav-btn-prev",
-        nextEl: ".on-sale-slider__nav-btn-next"
-      }
-    });
-  }
+    if (meatSlider) {
+        const meatSliderInit = new Swiper(meatSlider, {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 24,
+            pagination: {
+                el: ".meat-category-slider__pagination",
+                clickable: true
+            },
+            breakpoints: {
+                576: {
+                    slidesPerView: 2
+                },
+                992: {
+                    slidesPerView: 3
+                }
+            }
+        });
+    }
+    // Meat Feedback Slider
+    const meatFeedbackSlider = document.querySelector(".meat-feedback-slider");
+    if (meatFeedbackSlider) {
+        const meatFeedbackSliderInit = new Swiper(meatFeedbackSlider, {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 24,
+            autoplay: true,
+            speed: 2000,
+            breakpoints: {
+                992: {
+                    slidesPerView: 2
+                }
+            },
+            pagination: {
+                el: ".meat-feedback-slider-container__pagination",
+                clickable: true
+            }
+        });
+    }
+    // On Sale Slider
+    const onSaleSlider = document.querySelector(".on-sale-slider");
+    if (onSaleSlider) {
+        const onSaleSliderInit = new Swiper(onSaleSlider, {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 16,
+            navigation: {
+                prevEl: ".on-sale-slider__nav-btn-prev",
+                nextEl: ".on-sale-slider__nav-btn-next"
+            }
+        });
+    }
     //4.card progress bar
     $(".card-progressbar").each(function () {
         let data_target = $(this).find(".card-progress");
@@ -573,8 +573,10 @@ jQuery(function ($) {
         } else {
             setDarkMode(false);
         }
-        var toggleButton = document.querySelector(".tt-theme-toggle");
-        toggleButton && toggleButton.addEventListener("click", toggleDarkMode);
+        var toggleButtons = document.querySelectorAll(".tt-theme-toggle");
+        toggleButtons.forEach(btn => {
+            btn.addEventListener("click", toggleDarkMode);
+        });
     };
     initDarkMode();
 });

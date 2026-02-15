@@ -130,7 +130,7 @@
                 {{-- Light/Dark Mode Toggle --}}
                 <li>
                     <a href="javascript:void(0)" class="tt-theme-toggle w-100 d-flex align-items-center justify-content-between">
-                        <span>{{ localize('Theme Mode') }}</span>
+                        <span>{{ localize('Appearance') }}</span>
                         <div class="d-flex align-items-center">
                             <span class="tt-theme-light"><i class="fas fa-moon fs-lg"></i></span>
                             <span class="tt-theme-dark"><i class="fas fa-sun fs-lg"></i></span>
