@@ -87,4 +87,27 @@ class MediaManagerController extends Controller
         flash(localize('File has been deleted successfully'))->success();
         return back();
     }
+
+    # bulk delete media
+    public function bulkDelete(Request $request) 
+    {
+        $request->validate([
+            'media_ids' => 'required|array'
+        ]);
+
+        $mediaFiles = MediaManager::whereIn('id', $request->media_ids)->get();
+
+        foreach($mediaFiles as $mediaFile) {
+             # todo:: check auth user, media user -- 
+             if($mediaFile->user_id == Auth::user()->id || Auth::user()->user_type == 'admin') {
+                fileDelete($mediaFile->media_file);
+                $mediaFile->delete();
+             }
+        }
+        
+        return response()->json([
+            'success' => true,
+            'message' => localize('Selected files deleted successfully')
+        ]);
+    }
 }

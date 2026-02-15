@@ -289,4 +289,122 @@
         TT.getMediaSearch = $('input[name=media-search]').val();
         getMediaFiles(TT.getMediaType, TT.getMediaSearch, TT.getMediaSearch != '' ? true : false);
     })
+
+    // Bulk Delete Logic
+    function toggleSelectAll() {
+        // This is a simplified "Select All" that toggles all CURRENTLY visible items
+        // Since pagination exists, it only selects loaded items.
+        // A true "Select All" across all pages is complex with this pagination structure.
+        
+        let allVisibleIds = [];
+        $('.tt-media-item').each(function() {
+            allVisibleIds.push($(this).data('active-file-id'));
+        });
+
+        if (TT.selectedFiles && TT.selectedFiles.split(',').length >= allVisibleIds.length) {
+            // Deselect All
+            TT.selectedFiles = null;
+            $('.tt-media-item').removeClass('active-image');
+             $('#selectAllText').text('{{ localize("Select All") }}');
+        } else {
+            // Select All Visible
+             TT.selectedFiles = allVisibleIds.join(',');
+             $('.tt-media-item').addClass('active-image');
+             $('#selectAllText').text('{{ localize("Deselect All") }}');
+        }
+        updateBulkDeleteButton();
+    }
+
+    function updateBulkDeleteButton() {
+         if (TT.selectedFiles && TT.selectedFiles.length > 0) {
+            $('#bulkDeleteBtn').removeClass('d-none');
+        } else {
+            $('#bulkDeleteBtn').addClass('d-none');
+        }
+    }
+
+    // Override or hook into handleSelectedFiles to update button state
+    // We need to redefine handleSelectedFiles because the original one doesn't call our update function
+    // But since it's defined in the same scope, we can just replace it or wrap it. 
+    // However, the original is defined as a function declaration which is hoisted. 
+    // To be safe, we'll redefine it here but make sure it does what the original did + our update.
+
+    // Redefining handleSelectedFiles
+    window.handleSelectedFiles = function(fileId) {
+        // If uploadQty is single, we shouldn't allow multi-select unless we are in "bulk delete mode"
+        // But wait, the media manager is reused for selecting product images (multi) and avatars (single).
+        // If we are just in the media manager page, we want multi-select for deletion.
+        // We can check if we are in the standalone media manager page. 
+        // Logic: if button #bulkDeleteBtn exists in DOM, we allow multi-select behavior for deletion?
+        // Actually, let's just use the existing logic but ensure multi-select is enabled if we are on the manager page.
+        
+        // Check if we are on the main media manager page (not a modal)
+         const isMediaManagerPage = $('#bulkDeleteBtn').length > 0;
+
+         if (isMediaManagerPage) {
+             TT.uploadQty = 'multiple'; // Force multiple selection mode on this page
+         }
+
+        $('[data-active-file-id!=' + fileId + ']').removeClass('active-image'); // remove active class 
+        if (TT.uploadQty == "single") {
+            TT.selectedFiles = '' + fileId + ''
+        } else {
+            if (TT.selectedFiles != null) {
+                let tempSelected = TT.selectedFiles.split(",");
+
+                if (tempSelected.includes('' + fileId + '')) {
+
+                    tempSelected = tempSelected.filter(tempId => {
+                        return tempId != '' + fileId + ''
+                    })
+
+                    $('[data-active-file-id=' + fileId + ']').removeClass(
+                        'active-image'); // remove active class
+
+                } else {
+                    tempSelected.push(fileId);
+                }
+
+                if (tempSelected.length > 0) {
+                    TT.selectedFiles = tempSelected.toString();
+                } else {
+                    TT.selectedFiles = null;
+                }
+
+            } else {
+                TT.selectedFiles = '' + fileId + ''
+            }
+        }
+        activeSelectedFiles();
+        // getSelectedFilesCount(); // existing function is empty
+        updateBulkDeleteButton(); // NEW
+    }
+
+    function confirmBulkDelete() {
+        if (!TT.selectedFiles) return;
+        
+        if(confirm('{{ localize("Are you sure you want to delete these files?") }}')) {
+            $.ajax({
+                url: '{{ route("uppy.bulkDelete") }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    media_ids: TT.selectedFiles.split(',')
+                },
+                success: function(res) {
+                    if(res.success) {
+                        // Refresh the list
+                         TT.selectedFiles = null;
+                         updateBulkDeleteButton();
+                         getMediaFiles();
+                         // alert(res.message);
+                    }
+                },
+                error: function(err) {
+                    console.error(err);
+                    alert('{{ localize("Something went wrong") }}');
+                }
+            });
+        }
+    }
 </script>

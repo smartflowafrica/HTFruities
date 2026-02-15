@@ -52,6 +52,22 @@
                     </div>
                 </div>
             </form>
+
+            <div class="row align-items-center g-3 mt-2">
+                <div class="col-auto">
+                     <button type="button" class="btn btn-secondary" onclick="toggleSelectAll()">
+                        <i data-feather="check-square" width="18" class="me-1"></i>
+                        <span id="selectAllText">{{ localize('Select All') }}</span>
+                    </button>
+                </div>
+                 <div class="col-auto d-none" id="bulkDeleteBtn">
+                     <button type="button" class="btn btn-danger" onclick="confirmBulkDelete()">
+                        <i data-feather="trash-2" width="18" class="me-1"></i>
+                        {{ localize('Delete Selected') }}
+                    </button>
+                </div>
+            </div>
+            
             {{-- search --}}
         </div>
 

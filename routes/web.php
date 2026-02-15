@@ -181,6 +181,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('/media-manager/get-selected-files', [MediaManagerController::class, 'selectedFiles'])->name('uppy.selectedFiles');
     Route::post('/media-manager/add-files', [MediaManagerController::class, 'store'])->name('uppy.store');
     Route::get('/media-manager/delete-files/{id}', [MediaManagerController::class, 'delete'])->name('uppy.delete');
+    Route::post('/media-manager/bulk-delete-files', [MediaManagerController::class, 'bulkDelete'])->name('uppy.bulkDelete');
 });
 
 # payment gateways
