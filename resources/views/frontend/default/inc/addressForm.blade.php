@@ -1,4 +1,20 @@
- <div class="modal fade addAddressModal" id="addAddressModal">
+ <style>
+    .select2-container {
+        z-index: 999999 !important;
+    }
+    .select2-dropdown {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        z-index: 999999 !important;
+    }
+    .select2-results__option {
+        color: #333333 !important;
+    }
+    .select2-selection__rendered {
+        color: #333333 !important;
+    }
+</style>
+<div class="modal fade addAddressModal" id="addAddressModal">
      <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
              <div class="modal-body">
