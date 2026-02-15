@@ -316,5 +316,8 @@ Route::group(['prefix' => 'backend', 'middleware' => ['demo']], function () {
          Route::get('/clear-cache', [UtilityController::class, 'clearCache'])->name('admin.clear-cache');
          Route::get('/clear-log', [UtilityController::class, 'clearLog'])->name('admin.clearLog');
          Route::get('/debug', [UtilityController::class, 'debug'])->name('admin.debug');
+         
+         # Log Viewer
+         Route::get('/logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('admin.logs');
     }
 );

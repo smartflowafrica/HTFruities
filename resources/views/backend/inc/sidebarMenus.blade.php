@@ -315,6 +315,14 @@
 
 
 
+    <!-- System Logs -->
+    <li class="side-nav-item">
+        <a href="{{ route('admin.logs') }}" class="side-nav-link">
+            <span class="tt-nav-link-icon"><i data-feather="file-text"></i></span>
+            <span class="tt-nav-link-text">{{ localize('System Logs') }}</span>
+        </a>
+    </li>
+
     <!-- delivery -->
     @php
         $deliveryActiveRoutes = ['admin.deliverymen.index', 'admin.deliverymen.create', 'admin.deliverymen.edit'];
