@@ -55,11 +55,22 @@
 
             <div class="row align-items-center g-3 mt-2">
                 <div class="col-auto">
-                     <button type="button" class="btn btn-secondary" onclick="toggleSelectAll()">
+                     <button type="button" class="btn btn-secondary" id="selectAllBtn">
                         <i data-feather="check-square" width="18" class="me-1"></i>
                         <span id="selectAllText">{{ localize('Select All') }}</span>
                     </button>
                 </div>
+                
+                 {{-- Admin Filter --}}
+                @if(auth()->user()->user_type != 'customer' && auth()->user()->user_type != 'deliveryman')
+                <div class="col-auto">
+                    <select class="form-select form-select-sm" id="media-filter-by" onchange="getMediaFiles()">
+                        <option value="all">{{ localize('All Files') }}</option>
+                        <option value="me">{{ localize('My Uploads') }}</option>
+                    </select>
+                </div>
+                @endif
+
                  <div class="col-auto d-none" id="bulkDeleteBtn">
                      <button type="button" class="btn btn-danger" onclick="confirmBulkDelete()">
                         <i data-feather="trash-2" width="18" class="me-1"></i>

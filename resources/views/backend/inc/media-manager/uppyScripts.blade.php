@@ -290,16 +290,25 @@
         getMediaFiles(TT.getMediaType, TT.getMediaSearch, TT.getMediaSearch != '' ? true : false);
     })
 
+    // Bind Select All Click (jQuery)
+    $(document).on('click', '#selectAllBtn', function() {
+        toggleSelectAll();
+    });
+
     // Bulk Delete Logic
     window.toggleSelectAll = function() {
         let allVisibleIds = [];
         $('.tt-media-item').each(function() {
+            // Ensure ID is treated as string for consistency
             allVisibleIds.push($(this).data('active-file-id').toString());
         });
         
         if (allVisibleIds.length === 0) return;
 
         let currentSelected = TT.selectedFiles ? TT.selectedFiles.split(',') : [];
+        
+        // Force string conversion for comparison
+        currentSelected = currentSelected.map(String);
         
         // Check if all visible are selected
         let allSelected = allVisibleIds.every(id => currentSelected.includes(id));
@@ -311,7 +320,6 @@
             $('#selectAllText').text('{{ localize("Select All") }}');
         } else {
             // Select All Visible
-            // Add any visible IDs that aren't already in the list
             allVisibleIds.forEach(id => {
                 if (!currentSelected.includes(id)) {
                     currentSelected.push(id);
@@ -325,11 +333,11 @@
         updateBulkDeleteButton();
     }
 
-    function updateBulkDeleteButton() {
+    window.updateBulkDeleteButton = function() {
          if (TT.selectedFiles && TT.selectedFiles.length > 0) {
-            $('#bulkDeleteBtn').removeClass('d-none');
+            $('#bulkDeleteBtn').removeClass('d-none'); // Show
         } else {
-            $('#bulkDeleteBtn').addClass('d-none');
+            $('#bulkDeleteBtn').addClass('d-none'); // Hide
         }
     }
 
