@@ -131,7 +131,7 @@
                             <!--social login-->
 
                         </div>
-                                href="{{ route('register') }}">{{ localize('Sign Up') }}</a></p>
+                        <p class="mb-0 fs-xs mt-3">{{ localize("Don't have an Account?") }} <a href="{{ route('register') }}">{{ localize('Sign Up') }}</a></p>
 
                         <div class="mt-3 text-center">
                             <a href="{{ route('home') }}" class="fw-bold fs-xs text-secondary">

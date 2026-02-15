@@ -121,6 +121,10 @@
                         <a href="{{ route('logout') }}">{{ localize('Sign Out') }}</a>
                     </li>
                 @endauth
+                @guest
+                    <li>
+                        <a href="{{ route('login') }}">{{ localize('Sign In') }}</a>
+                    </li>
                 @endguest
 
                 {{-- Light/Dark Mode Toggle --}}
