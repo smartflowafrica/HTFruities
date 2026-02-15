@@ -1,9 +1,4 @@
-/*================
- Template Name: Grostore - eCommerce Admin Dashboard
- Description: Multipurpose eCommerce html template with admin dashboard. Multivendor responsive eCommerce template.
- Version: 1.0
- Author: https://themeforest.net/user/themetags
-=======================*/
+
 // TABLE OF CONTENTS
 
 jQuery(function ($) {

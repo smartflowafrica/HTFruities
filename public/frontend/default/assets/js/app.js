@@ -1,9 +1,4 @@
-/*================
- Template Name: gShop - Grocery eCommerce HTML Template
- Description: Multipurpose eCommerce html template a responsive eCommerce template.
- Version: 1.0
- Author: https://themeforest.net/user/themetags
-=======================*/
+
 // TABLE OF CONTENTS
 // 1. preloader
 // 2. swiper slider for all carousel
