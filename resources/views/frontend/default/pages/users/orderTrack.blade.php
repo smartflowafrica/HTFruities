@@ -42,20 +42,19 @@
 
                         @isset($order)
                             <ol id="progress-bar">
-
                                 <li class="fs-xs tt-step @if ($order->delivery_status != orderCancelledStatus()) tt-step-done @endif">
                                     {{ localize('Order Placed') }}</li>
                                 <li
-                                    class="fs-xs tt-step @if ($order->delivery_status == orderProcessingStatus() || $order->delivery_status == orderDeliveredStatus()) tt-step-done  
-@elseif ($order->delivery_status == orderPendingStatus())
-active @endif">
+                                    class="fs-xs tt-step @if ($order->delivery_status == orderProcessingStatus() || $order->delivery_status == orderPickedUpStatus() || $order->delivery_status == orderOutForDeliveryStatus() || $order->delivery_status == orderDeliveredStatus()) tt-step-done 
+                                    @elseif ($order->delivery_status == orderPendingStatus())
+                                    active @endif">
                                     {{ localize('Pending') }}</li>
                                 <li
-                                    class="fs-xs tt-step @if ($order->delivery_status == orderDeliveredStatus()) tt-step-done  
+                                    class="fs-xs tt-step @if ($order->delivery_status == orderPickedUpStatus() || $order->delivery_status == orderOutForDeliveryStatus() || $order->delivery_status == orderDeliveredStatus()) tt-step-done 
                                     @elseif ($order->delivery_status == orderProcessingStatus())
                                     active @endif">
                                     {{ localize('Processing') }}</li>
-                                <li class="fs-xs tt-step @if ($order->delivery_status == orderDeliveredStatus()) tt-step-done @endif">
+                                <li class="fs-xs tt-step @if ($order->delivery_status == orderDeliveredStatus()) tt-step-done @elseif ($order->delivery_status == orderOutForDeliveryStatus()) active @endif">
                                     {{ localize('Delivered') }}</li>
                             </ol>
                             <div class="table-responsive-md mt-5">
