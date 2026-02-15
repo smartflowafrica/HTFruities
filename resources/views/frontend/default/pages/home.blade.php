@@ -7,7 +7,7 @@
 @section('meta')
     <meta property="og:title" content="{{ getSetting('system_title') }} - Fresh & Organic" />
     <meta property="og:description" content="Order fresh customized parfaits, organic fruits, and healthy juices delivered to your doorstep." />
-    <meta property="og:image" content="{{ uploadedAsset(getSetting('global_meta_image')) }}" />
+    <meta property="og:image" content="{{ staticAsset('pwa.png') }}?v=2" />
     <meta property="og:url" content="{{ route('home') }}" />
     <meta property="og:type" content="website" />
 @endsection
