@@ -17,7 +17,7 @@ class MediaManagerController extends Controller
 
         $mediaFiles = MediaManager::query()->latest();
 
-        if (Auth::user()->user_type != 'admin') {
+        if (Auth::user()->user_type == 'customer' || Auth::user()->user_type == 'deliveryman') {
             $mediaFiles = $mediaFiles->where('user_id', Auth::user()->id);
         }
 

@@ -291,27 +291,37 @@
     })
 
     // Bulk Delete Logic
-    function toggleSelectAll() {
-        // This is a simplified "Select All" that toggles all CURRENTLY visible items
-        // Since pagination exists, it only selects loaded items.
-        // A true "Select All" across all pages is complex with this pagination structure.
-        
+    window.toggleSelectAll = function() {
         let allVisibleIds = [];
         $('.tt-media-item').each(function() {
-            allVisibleIds.push($(this).data('active-file-id'));
+            allVisibleIds.push($(this).data('active-file-id').toString());
         });
+        
+        if (allVisibleIds.length === 0) return;
 
-        if (TT.selectedFiles && TT.selectedFiles.split(',').length >= allVisibleIds.length) {
-            // Deselect All
-            TT.selectedFiles = null;
+        let currentSelected = TT.selectedFiles ? TT.selectedFiles.split(',') : [];
+        
+        // Check if all visible are selected
+        let allSelected = allVisibleIds.every(id => currentSelected.includes(id));
+
+        if (allSelected) {
+            // Deselect All Visible
+            currentSelected = currentSelected.filter(id => !allVisibleIds.includes(id));
             $('.tt-media-item').removeClass('active-image');
-             $('#selectAllText').text('{{ localize("Select All") }}');
+            $('#selectAllText').text('{{ localize("Select All") }}');
         } else {
             // Select All Visible
-             TT.selectedFiles = allVisibleIds.join(',');
-             $('.tt-media-item').addClass('active-image');
-             $('#selectAllText').text('{{ localize("Deselect All") }}');
+            // Add any visible IDs that aren't already in the list
+            allVisibleIds.forEach(id => {
+                if (!currentSelected.includes(id)) {
+                    currentSelected.push(id);
+                }
+            });
+            $('.tt-media-item').addClass('active-image');
+            $('#selectAllText').text('{{ localize("Deselect All") }}');
         }
+        
+        TT.selectedFiles = currentSelected.length > 0 ? currentSelected.join(',') : null;
         updateBulkDeleteButton();
     }
 
