@@ -40,7 +40,7 @@
         <!-- Schema.org markup for Google+ -->
         <meta itemprop="name" content="{{ getSetting('global_meta_title') }}" />
         <meta itemprop="description" content="{{ getSetting('global_meta_description') }}" />
-        <meta itemprop="image" content="{{ uploadedAsset(getSetting('global_meta_image')) }}" />
+        <meta itemprop="image" content="{{ staticAsset('/pwa.png') }}" />
 
         <!-- Twitter Card data -->
         <meta name="twitter:card" content="product" />
@@ -49,13 +49,13 @@
         <meta name="twitter:description" content="{{ getSetting('global_meta_description') }}" />
         <meta name="twitter:creator"
             content="@author_handle"/>
-    <meta name="twitter:image" content="{{ uploadedAsset(getSetting('global_meta_image')) }}"/>
+    <meta name="twitter:image" content="{{ staticAsset('/pwa.png') }}"/>
 
     <!-- Open Graph data -->
     <meta property="og:title" content="{{ getSetting('global_meta_title') }}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ route('home') }}" />
-    <meta property="og:image" content="{{ uploadedAsset(getSetting('global_meta_image')) }}" />
+    <meta property="og:image" content="{{ staticAsset('/pwa.png') }}" />
     <meta property="og:description" content="{{ getSetting('global_meta_description') }}" />
     <meta property="og:site_name" content="{{ env('APP_NAME') }}" />
     <meta property="fb:app_id" content="{{ env('FACEBOOK_PIXEL_ID') }}">
