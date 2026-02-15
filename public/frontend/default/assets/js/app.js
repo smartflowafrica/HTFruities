@@ -554,9 +554,11 @@ jQuery(function ($) {
         if (active) {
             wrapper.setAttribute("data-bs-theme", "dark");
             localStorage.setItem("theme", "dark");
+            $('.mode-label').text('Dark Mode'); // Dynamic Label
         } else {
             wrapper.setAttribute("data-bs-theme", "light");
             localStorage.setItem("theme", "light");
+            $('.mode-label').text('Light Mode'); // Dynamic Label
         }
     };
     var toggleDarkMode = () => {
@@ -573,10 +575,13 @@ jQuery(function ($) {
         } else {
             setDarkMode(false);
         }
-        var toggleButtons = document.querySelectorAll(".tt-theme-toggle");
-        toggleButtons.forEach(btn => {
-            btn.addEventListener("click", toggleDarkMode);
-        });
     };
+
+    // Event Delegation for robustness (handles mobile menu clones/dynamic inserts)
+    $(document).on("click", ".tt-theme-toggle", function (e) {
+        e.preventDefault();
+        toggleDarkMode();
+    });
+
     initDarkMode();
 });
